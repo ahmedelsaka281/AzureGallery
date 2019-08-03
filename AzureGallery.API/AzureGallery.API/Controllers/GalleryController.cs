@@ -43,6 +43,15 @@ namespace AzureGallery.API.Controllers
         {
             var res = await _azureService.DownloadFileAsync(fileName);
 
+            //var memory = new MemoryStream();
+            //using (var stream = new FileStream(res, FileMode.Open))
+            //{
+            //    await stream.CopyToAsync(memory);
+            //}
+            //memory.Position = 0;
+
+            //return File(memory, GetContentType(res), Guid.NewGuid() + ".jpg");
+
             if (res)
                 return Ok("Downloaded Successfully");
 
