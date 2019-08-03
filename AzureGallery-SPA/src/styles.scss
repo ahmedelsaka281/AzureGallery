@@ -1,0 +1,62 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~alertifyjs/build/css/themes/bootstrap.min.css'; //alertify theme
+
+
+.flex {
+  display: flex;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+
+
+/* cards */
+.cards {
+  flex-wrap: wrap;
+
+  .card {
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+    flex: 1 0 21%;
+    margin: 5px;
+    height: 250px;
+
+    .card-wrapper {
+      overflow: hidden;
+      position: relative;
+
+      .card-icons {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        opacity: 0;
+      }
+
+      .animate {
+        transition: all 0.3s ease-in-out;
+      }
+    }
+
+    .card-wrapper:hover {
+      img {
+        cursor: pointer;
+        transform: scale(1.2, 1.2);
+        transition-duration: 500ms;
+        transition-timing-function: ease-out;
+        opacity: 0.8;
+      }
+
+      .card-icons {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+
+
+.upload-spinner {
+  font-size: 25px;
+}

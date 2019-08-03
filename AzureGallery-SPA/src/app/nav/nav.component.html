@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand">AzureGallery</a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active"><a class="nav-link" [routerLink]="['/home']">Home <span class="sr-only"></span></a></li>
+    </ul>
+
+    <div class="btn-group" *ngIf="auth.isLoggedIn">
+      <b class="mt-2"> Welcome {{auth.currentUser.name}} <span class="caret"></span></b>
+      <button class="btn btn-outline-danger ml-3" type="button" (click)="auth.logout()">Logout</button>
+    </div>
+
+    <form class="form-inline" #loginForm="ngForm" (submit)="login()" *ngIf="!auth.isLoggedIn">
+      <input class="form-control mr-sm-2" name="username" [(ngModel)]="userLoginDTO.username" type="text" placeholder="username" required />
+      <input class="form-control mr-sm-2" name="password" [(ngModel)]="userLoginDTO.password" type="password" placeholder="password" required />
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" [disabled]="loginForm.invalid">Login</button>
+    </form>
+  </div>
+</nav>
