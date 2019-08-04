@@ -76,7 +76,7 @@ namespace AzureGallery.Services.Services
             {
                 Subject = new ClaimsIdentity(calims),
                 SigningCredentials = creds,
-                Expires = DateTime.Now.AddHours(6),
+                Expires = DateTime.UtcNow.AddHours(12),
             };
 
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
