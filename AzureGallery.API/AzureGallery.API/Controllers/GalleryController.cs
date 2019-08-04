@@ -12,10 +12,12 @@ namespace AzureGallery.API.Controllers
     public class GalleryController : ControllerBase
     {
         public IAzureService _azureService;
+        public IIOService _iOService;
 
-        public GalleryController(IAzureService azureService)
+        public GalleryController(IAzureService azureService, IIOService iOService)
         {
             _azureService = azureService;
+            _iOService = iOService;
         }
 
 
@@ -38,25 +40,29 @@ namespace AzureGallery.API.Controllers
             return StatusCode((int)HttpStatusCode.InternalServerError, "Error When Upload File!");
         }
 
-        [HttpPost("DownloadFile/{fileName}")]
-        public async Task<ActionResult> DownloadFile(string fileName)
+
+        [HttpGet("DownloadFile/{name}")]
+        public async Task<FileResult> DownloadFile(string name)
         {
-            var res = await _azureService.DownloadFileAsync(fileName);
+            FileContentResult result = null;
+            if (!string.IsNullOrEmpty(name))
+            {
+                string path = await _azureService.DownloadFileAsync(name);
+                byte[] binaryContent = System.IO.File.ReadAllBytes(path);
+                string fileName = System.IO.Path.GetFileName(path);
+                string mimeType = _iOService.GetMimeTypeByWindowsRegistry(fileName);
 
-            //var memory = new MemoryStream();
-            //using (var stream = new FileStream(res, FileMode.Open))
-            //{
-            //    await stream.CopyToAsync(memory);
-            //}
-            //memory.Position = 0;
-
-            //return File(memory, GetContentType(res), Guid.NewGuid() + ".jpg");
-
-            if (res)
-                return Ok("Downloaded Successfully");
-
-            return StatusCode((int)HttpStatusCode.InternalServerError, "Error When Download File!");
+                if (binaryContent != null)
+                {
+                    result = new FileContentResult(binaryContent, mimeType)
+                    {
+                        FileDownloadName = fileName,
+                    };
+                }
+            }
+            return result;
         }
+
 
         [HttpDelete("DeleteFile/{fileName}")]
         public async Task<ActionResult> DeleteFile(string fileName)

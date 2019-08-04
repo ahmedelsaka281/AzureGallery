@@ -21,8 +21,8 @@ export class AzureService {
     return this.http.delete(this.azureUrl + 'deleteFile/' + name + '', { responseType: 'text' });
   }
 
-  downloadFile(name: string): Observable<any> {
-    return this.http.post(this.azureUrl + 'downloadFile/' + name + '', null, { responseType: 'text' });
+  downloadFile(name: string) {
+    window.open(encodeURI(`${this.azureUrl}downloadFile/${name}`), '_blank');
   }
 
   uploadFile(formData: FormData): Observable<any> {

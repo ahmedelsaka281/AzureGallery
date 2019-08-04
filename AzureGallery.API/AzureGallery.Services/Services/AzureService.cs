@@ -75,7 +75,7 @@ namespace AzureGallery.Services.Services
             return false;
         }
 
-        public async Task<bool> DownloadFileAsync(string fileName)
+        public async Task<string> DownloadFileAsync(string fileName)
         {
             try
             {
@@ -86,9 +86,10 @@ namespace AzureGallery.Services.Services
 
                 CloudBlockBlob cloudBlockBlob = cloudBlobContainer.GetBlockBlobReference(fileName);
                 await cloudBlockBlob.DownloadToFileAsync(destination, FileMode.Create);
-                return true;
+
+                return destination;
             }
-            catch { return false; }
+            catch { return null; }
         }
 
         public async Task<bool> DeleteFileAsync(string fileName)

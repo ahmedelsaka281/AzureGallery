@@ -8,7 +8,7 @@ namespace AzureGallery.Services.IServices
     {
         Task<List<string>> GetAllFilesAsync();
         Task<bool> UploadFileAsync(IFormFile file);
-        Task<bool> DownloadFileAsync(string fileName);
+        Task<string> DownloadFileAsync(string fileName);
         Task<bool> DeleteFileAsync(string fileName);
         Task<bool> DeleteAllFilesAsync();
     }

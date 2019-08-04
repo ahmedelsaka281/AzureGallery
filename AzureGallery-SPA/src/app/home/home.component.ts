@@ -45,15 +45,9 @@ export class HomeComponent implements OnInit {
   }
 
   downloadFile(img) {
-    this.downloadDisabled = true;
     const name = img.split('/')[4];
-    this.azureService.downloadFile(name).subscribe((res) => {
-      this.alertifyService.success(res);
-      this.downloadDisabled = false;
-    }, (err) => {
-      this.alertifyService.error(err.error);
-      this.downloadDisabled = false;
-    });
+    this.azureService.downloadFile(name);
+    this.downloadDisabled = false;
   }
 
   uploadFile(blop) {

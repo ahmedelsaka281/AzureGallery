@@ -35,6 +35,14 @@ namespace AzureGallery.Services.Services
                 File.Delete(filePath);
             }
         }
-      
+
+        public string GetMimeTypeByWindowsRegistry(string filePath)
+        {
+            string mimeType = "application/unknown";
+            string ext = (filePath.Contains(".")) ? System.IO.Path.GetExtension(filePath).ToLower() : "." + filePath;
+            Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext);
+            if (regKey != null && regKey.GetValue("Content Type") != null) mimeType = regKey.GetValue("Content Type").ToString();
+            return mimeType;
+        }
     }
 }

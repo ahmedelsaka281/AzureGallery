@@ -8,5 +8,6 @@ namespace AzureGallery.Services.IServices
         Task<bool> WriteFileAsync(IFormFile file, string filePath);
         void CreateDirectoryIfNotExist(string dirPath);
         void DeleteFileIfExist(string filePath);
+        string GetMimeTypeByWindowsRegistry(string filePath);
     }
 }
