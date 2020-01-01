@@ -1,6 +1,6 @@
 # AzureGallery
 
-This Application Is A .NET Core 2.2 And Angular Application That build A Picture Gallery with Azure storage.
+This Application Is A .NET Core 2.2 And Angular Application That Manage Gallery with Azure storage.
 
 ## Installation
 - Download the repo
